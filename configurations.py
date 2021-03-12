@@ -48,7 +48,7 @@ class Sprites:
             self.f = f
 
         def mouse_in(self):
-            img = pygame.image.load(os.path.join(f'images/buttons/start/{str(self.frame)}.png')).convert()
+            img = pygame.image.load(os.path.join(f'images/buttons/start/{str(int(self.frame))}.png')).convert()
             self.image = img
             self.frame += 1
             if self.frame > self.f:
@@ -75,9 +75,7 @@ class Sprites:
                 m = 5
             else:
                 img = None
-            # self.image = pygame.transform.scale(img, (int((WIDTH * 0.282)), int(HEIGHT * 0.3786)))
-            self.image = img
-            print(int((WIDTH * 0.282)), int(HEIGHT * 0.3786))
+            self.image = pygame.transform.scale(img, (int(WIDTH * 120 // 1336), int(HEIGHT * 220 // 768)))
             self.image.set_colorkey(WHITE)
             self.position[0] += m
             self.frame += 1
@@ -89,18 +87,18 @@ class Sprites:
         def __init__(self):
             pygame.sprite.Sprite.__init__(self)
             self.mode = 53
-            self.image = pygame.image.load(
-                os.path.join(f'images/bottle/{str(self.mode)}.png')).convert()
+            img = pygame.image.load(os.path.join(f'images/bottle/{str(self.mode)}.png')).convert()
+            self.image = pygame.transform.scale(img, (int(WIDTH * 130 // 1336), int(HEIGHT * 180 // 768)))
             self.image.set_colorkey(BLACK)
             self.rect = self.image.get_rect()
-            self.rect.center = (500, 300)
+            self.rect.center = (755, 85)
 
         def update(self):
+            img = pygame.image.load(os.path.join(f'images/bottle/{str(self.mode)}.png')).convert()
+            self.image = pygame.transform.scale(img, (int(WIDTH * 130 // 1336), int(HEIGHT * 180 // 768)))
             self.mode += 1
             if self.mode >= 54:
                 self.mode = 1
-            self.image = pygame.image.load(
-                os.path.join(f'images/bottle/{str(self.mode)}.png')).convert()
             self.image.set_colorkey(BLACK)
 
     player = pygame.sprite.Group()
@@ -124,4 +122,5 @@ sprites = Sprites
 backgrounds = Background
 settings = Settings
 
+print(WIDTH, HEIGHT)
 pygame.quit()
